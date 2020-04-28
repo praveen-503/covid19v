@@ -1,0 +1,284 @@
+<div class="container">
+<div class="header bg-gradient-danger pb-8 pt-3 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row text-center">
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+
+                  <h5 class="card-title text-uppercase  text-danger mb-0">Confirmed</h5>
+                  <span class="h2 font-weight-bold mb-0 text-white"> {{dashBoardService.latestCasesCount?.confirmedCount}}</span>
+                </div>
+
+              </div>
+              <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase  mb-0 text-warning">Active</h5>
+                  <span class="h2 font-weight-bold mb-0 text-white">{{dashBoardService.latestCasesCount?.activeCount}}</span>
+                </div>
+
+              </div>
+              <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                <span class="text-nowrap">Since last week</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-success  mb-0">Recovered</h5>
+                  <span class="h2 font-weight-bold mb-0 text-white">{{dashBoardService.latestCasesCount?.recoveredCount}}</span>
+                </div>
+
+              </div>
+              <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                <span class="text-nowrap">Since yesterday</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase   mb-0" style="color:red">Deceased</h5>
+                  <span class="h2 font-weight-bold mb-0 text-white">{{dashBoardService.latestCasesCount?.deceasedCount}}</span>
+                </div>
+
+              </div>
+              <!-- <p class="mt-3 mb-0 text-muted text-sm">
+                <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                <span class="text-nowrap">Since last month</span>
+              </p> -->
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="row">
+          <div class="col-xl-3 col-lg-6">
+          </div>
+          <div class="col-xl-6 col-lg-12 text-center">
+            <label class=" btn btn-sm btn-success btn-simple"
+            (click)="dashBoardService.getIpAddress()"
+                >
+              <input
+                class=" d-none d-sm-none"
+                name="options"
+                type="radio"
+              />
+
+              <span
+                class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+              >
+                Click here
+              </span>
+              <span class=" d-block d-sm-none">
+               <small>Click here</small>
+              </span>
+            </label>
+            <span>
+              for distance from nearest COVID19 confirmed case in India
+            </span>
+            <br><p *ngIf="!dashBoardService.clickedButton">Your current location will be used to get this data</p>
+            <p *ngIf="dashBoardService.clickedButton"><b class="text-danger">{{dashBoardService.nearByCovid19Case}}</b>  Don't panic, there might be +/- 5km error in some cases. Stay Home and Stay Safe.</p>
+
+          </div>
+          <div class="col-xl-3 col-lg-6">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class=" row">
+    <div class=" col-lg-4 col-md-12">
+      <app-tables></app-tables>
+    </div>
+    <div class=" col-lg-4 col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+
+          <div class=" row">
+            <div class=" col-sm-6 text-left">
+              <!-- <h5 class=" card-category">Total Shipments</h5> -->
+              <h3 class=" card-title">{{dashBoardService.stateName}}</h3>
+            </div>
+            <div class=" col-sm-6">
+              <div
+                class=" btn-group btn-group-toggle float-right"
+                data-toggle="buttons"
+              >
+                <label class=" btn btn-sm btn-warning btn-simple " (click)="getBackToIndia('IN')"
+                >
+                  <input checked="checked" name="options" type="radio" />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    India
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    India
+                    <!-- <i class=" tim-icons icon-minimal-left"> </i> -->
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          </div>
+        <div class=" card-body">
+          <app-india-svg></app-india-svg>
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-4 col-md-12">
+      <app-side-charts></app-side-charts>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <app-india-prediction></app-india-prediction>
+  <!-- <div class=" row">
+    <div class=" col-12">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <div class=" row">
+            <div class=" col-sm-6 text-left">
+              <h5 class=" card-category">Total Shipments</h5>
+              <h2 class=" card-title">Performance</h2>
+            </div>
+            <div class=" col-sm-6">
+              <div
+                class=" btn-group btn-group-toggle float-right"
+                data-toggle="buttons"
+              >
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
+                  <input checked="checked" name="options" type="radio" />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Accounts
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-single-02"> </i>
+                  </span>
+                </label>
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[1];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
+                  <input
+                    class=" d-none d-sm-none"
+                    name="options"
+                    type="radio"
+                  />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Purchases
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-gift-2"> </i>
+                  </span>
+                </label>
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
+                  <input class=" d-none" name="options" type="radio" />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Sessions
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-tap-02"> </i>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Total Shipments</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 763,215
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="chartLineRed"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Daily Sales</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-delivery-fast text-info"> </i> 3,500€
+          </h3>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="CountryChart"> </canvas></div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h5 class=" card-category">Completed Tasks</h5>
+          <h3 class=" card-title">
+            <i class=" tim-icons icon-send text-success"> </i> 12,100K
+          </h3>
+        </div>
+        <div class=" card-body">
+          <a name="" id="" class="btn btn-primary" (click)="onChange()" role="button">Praveen onchange button</a>
+          <div class=" chart-area"><canvas id="CountryChart"> </canvas></div>
+
+          <div class=" chart-area"><canvas id="chartLineGreen"> </canvas></div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+
+</div>

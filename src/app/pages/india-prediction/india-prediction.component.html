@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12" *ngIf="dashBoardService.isPredection">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-4 text-left">
+            <h3 class="card-title">
+              Expected cases in {{ dashBoardService.stateName}}
+            </h3>
+            <p *ngIf="dashBoardService.activate == 's1'" class="text-success"><b class="text-danger">S1:</b>Continue lockdown untill week 6 </p>
+            <p *ngIf="dashBoardService.activate == 's2'" class="text-success"> <b class="text-danger">S2:</b>Lockdown lifted on 21-Apr </p>
+            <p *ngIf="dashBoardService.activate == 's3'" class="text-success"> <b class="text-danger">S3:</b>Lockdown with 5 day gap </p>
+          </div>
+          <div class="col-sm-4 text-left"></div>
+          <div class="col-sm-4">
+            <div
+              class="btn-group btn-group-toggle float-right"
+              data-toggle="buttons"
+            >
+              <label
+                class="btn btn-sm btn-success btn-simple"
+                (click)="dashBoardService.onChangeCommonData('s1')"
+                [ngClass]="{ active: dashBoardService.activate == 's1' }"
+              >
+                <input checked="checked" name="options" type="radio" />
+
+                <span
+                  class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                >
+                  <!-- Continue lockdown untill week 6 -->
+                  S1
+                </span>
+                <span class="d-block d-sm-none">
+                  S1
+                  <!-- <i class=" tim-icons icon-single-02"> </i> -->
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-success btn-simple"
+                (click)="dashBoardService.onChangeCommonData('s2')"
+                [ngClass]="{ active: dashBoardService.activate == 's2' }"
+              >
+                <input class="d-none d-sm-none" name="options" type="radio" />
+
+                <span
+                  class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                >
+                  <!-- Lockdown lifted on 21-Apr -->
+                  S2
+                </span>
+                <span class="d-block d-sm-none">
+                  S2
+                  <!-- <i class=" tim-icons icon-gift-2"> </i> -->
+                </span>
+              </label>
+              <label
+                class="btn btn-sm btn-success btn-simple"
+                (click)="dashBoardService.onChangeCommonData('s3')"
+                [ngClass]="{ active: dashBoardService.activate == 's3' }"
+              >
+                <input class="d-none" name="options" type="radio" />
+
+                <span
+                  class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                >
+                  S3
+                  <!-- Lockdown with 5 day gap -->
+                </span>
+                <span class="d-block d-sm-none">
+                  S3
+                  <!-- <i class=" tim-icons icon-tap-02"> </i> -->
+                </span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-body text-white"  >
+
+        <ngx-charts-area-chart
+
+        (window:resize)="onResize($event)"
+        [view]="view"
+        [scheme]="colorScheme[0]"
+        [results]="dashBoardService.commonSeriesData"
+        [gradient]="gradient"
+        [showGridLines]="showGridLines"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="!showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+      >
+        <!-- [maxXAxisTickLength]="maxXAxisTickLength" -->
+      </ngx-charts-area-chart>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 text-center" *ngIf="!dashBoardService.isPredection">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h4>
+          Projections for this state are not available at this point
+        </h4>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12" *ngIf="dashBoardService.isPredection">
+    <div class="card card-chart">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-4 text-left">
+            <h3 class="card-title">
+              Expected Hospitalizations in {{ dashBoardService.stateName}}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-body text-white" >
+
+        <ngx-charts-area-chart
+        (window:resize)="onResize($event)"
+        [view]="view"
+        [scheme]="colorScheme[1]"
+        [results]="dashBoardService.hospitalSeries"
+        [gradient]="gradient"
+        [showGridLines]="showGridLines"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="!showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [trimXAxisTicks]="trimXAxisTicks"
+      ></ngx-charts-area-chart>
+        <!-- [maxXAxisTickLength]="maxXAxisTickLength" -->
+
+      </div>
+    </div>
+  </div>
+
+</div>

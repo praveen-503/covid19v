@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-tasks">
+    <div class="card-header">
+      <h4 class="card-title">Top {{ dService.statesOrDistricts }}</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-full-width table-responsive">
+        <table class="table tablesorter" id="">
+          <thead class="text-primary">
+            <tr>
+              <th>{{dService.statesOrDistricts }}</th>
+              <th>Confirmed</th>
+              <th *ngIf="!dService.isDistrict">Active</th>
+              <th *ngIf="!dService.isDistrict">Recovered</th>
+              <th *ngIf="!dService.isDistrict">Deceased</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dService.topFiveStates">
+              <td >{{ row.name }}</td>
+              <td >{{ row.confirmedCount }}</td>
+              <td *ngIf="!dService.isDistrict">{{ row.activeCount }}</td>
+              <td *ngIf="!dService.isDistrict">{{ row.recoveredCount }}</td>
+              <td *ngIf="!dService.isDistrict">{{ row.deceasedCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="card-tasks">
+    <div class="card-header">
+      <h4 class="card-title">Hospital Details</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-full-width table-responsive">
+        <table class="table tablesorter" id="">
+          <tbody>
+            <tr *ngFor="let item of dService.hospitalLatestData">
+              <td>{{ item.name }}</td>
+              <td>{{ item.count }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+

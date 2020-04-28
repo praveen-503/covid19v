@@ -1,0 +1,97 @@
+<div class=" card card-chart">
+  <div class=" card-header">
+    <div class=" row">
+      <div class=" col-sm-6 text-left">
+        <!-- <h5 class=" card-category">Total Shipments</h5> -->
+        <h3 class=" card-title">{{dashService.stateName}}</h3>
+      </div>
+      <div class=" col-sm-6">
+        <div
+          class=" btn-group btn-group-toggle float-right"
+          data-toggle="buttons"
+        >
+          <label class=" btn btn-sm btn-success btn-simple " (click)="changeData('daily')"
+          [ngClass]="{'active': isDaily==true}">
+            <input checked="checked" name="options" type="radio" />
+
+            <span
+              class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+            >
+              Daily
+            </span>
+            <span class=" d-block d-sm-none">
+              Daily
+              <!-- <i class=" tim-icons icon-single-02"> </i> -->
+            </span>
+          </label>
+          <label class=" btn btn-sm btn-success btn-simple"
+          (click)="changeData('cumulative')"
+              [ngClass]="{'active': isDaily!=true}">
+            <input
+              class=" d-none d-sm-none"
+              name="options"
+              type="radio"
+            />
+
+            <span
+              class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+            >
+              Cumulative
+            </span>
+            <span class=" d-block d-sm-none">
+              Cumulative
+              <!-- <i class=" tim-icons icon-gift-2"> </i> -->
+            </span>
+          </label>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" card-body">
+    <ng-template
+    *ngIf="isDaily;then cumulativeComponent ; else dailyComponent">
+  </ng-template>
+  <ng-template #dailyComponent>
+    <div class="row ml-5" *ngFor="let item of dashService.stateCumulativeWiseData ; let i = index">
+      <ngx-charts-line-chart
+      (window:resize)="onResize($event)"
+      [view]="view"
+      [scheme]="colorScheme[i]"
+      [results]="item"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="!showLegend"
+      [showXAxisLabel]="!showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [showGridLines]="showGridLines"
+      [xAxisLabel]="!xAxisLabel"
+      [yAxisLabel]="yAxisLabel[i]"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-line-chart>
+  </div>
+  </ng-template>
+  <ng-template #cumulativeComponent>
+    <div class="row ml-5" *ngFor="let item of dashService.stateDayWiseData; let i = index">
+      <ngx-charts-bar-vertical
+      (window:resize)="onResize($event)"
+      [view]="view"
+      [scheme]="colorScheme[i]"
+      [results]="item[0].series"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [rotateXAxisTicks]="!rotateXAxisTicks"
+      [showGridLines]="showGridLines"
+      [showXAxisLabel]="!showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="!xAxisLabel"
+      [yAxisLabel]="yAxisLabel[i]"
+      (select)="onSelect($event)"
+    >
+    </ngx-charts-bar-vertical>
+    </div>
+  </ng-template>
+  </div>
+</div>
